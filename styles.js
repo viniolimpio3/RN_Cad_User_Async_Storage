@@ -98,6 +98,17 @@ const styles = StyleSheet.create({
   },
   iconeLimpar:{
     fontSize: 40,
+  },
+  senhaContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '100%',
+  },
+  botaoMostrarSenha: {
+    position: 'absolute',
+    right: 10,
+    height: 40,
+    justifyContent: 'center',
   }
 });
 

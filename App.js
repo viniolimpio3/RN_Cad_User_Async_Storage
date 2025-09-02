@@ -12,6 +12,8 @@ export default function App() {
   const [codigo, setCodigo] = useState(0);
   const [senha, setSenha] = useState("");
   const [confirmaSenha, setConfirmaSenha] = useState("");
+  const [mostrarSenha, setMostrarSenha] = useState(false);
+  const [mostrarConfirmaSenha, setMostrarConfirmaSenha] = useState(false);
 
 
   function limpar() {
@@ -52,8 +54,8 @@ export default function App() {
         message: "Código deve ser maior que zero."
       },
       {
-        condition: /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{5}$/.test(senha),
-        message: "Senha deve ter ao menos 1 caractere maiúsculo, 1 número e 5 caracteres."
+        condition: /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{5,}$/.test(senha),
+        message: "Senha deve ter ao menos 1 caractere maiúsculo, 1 número e no mínimo 5 caracteres."
       }
     ]
 
@@ -125,24 +127,38 @@ export default function App() {
       <View style={styles.areaCadastro}>
         <View style={styles.areaTelefone}>
           <Text style={styles.legendaTelefone}>Senha</Text>
-          <TextInput
-            keyboardType="phone-pad"
-            secureTextEntry={true}
-            style={styles.campoTelefone}
-            onChangeText={(senha) => setSenha(senha)}
-            value={senha}
-          />
+          <View style={styles.senhaContainer}>
+            <TextInput
+              secureTextEntry={!mostrarSenha}
+              style={[styles.campoTelefone, { flex: 1 }]}
+              onChangeText={(senha) => setSenha(senha)}
+              value={senha}
+            />
+            <TouchableOpacity
+              style={styles.botaoMostrarSenha}
+              onPress={() => setMostrarSenha(!mostrarSenha)}
+            >
+              <Text>{mostrarSenha ? '👁️' : '👁️‍🗨️'}</Text>
+            </TouchableOpacity>
+          </View>
         </View>
 
         <View style={styles.areaTelefone}>
           <Text style={styles.legendaTelefone}>Confirmação de senha</Text>
-          <TextInput
-            keyboardType="phone-pad"
-            secureTextEntry={true}
-            style={styles.campoTelefone}
-            onChangeText={(confirmaSenha) => setConfirmaSenha(confirmaSenha)}
-            value={confirmaSenha}
-          />
+          <View style={styles.senhaContainer}>
+            <TextInput
+              secureTextEntry={!mostrarConfirmaSenha}
+              style={[styles.campoTelefone, { flex: 1 }]}
+              onChangeText={(confirmaSenha) => setConfirmaSenha(confirmaSenha)}
+              value={confirmaSenha}
+            />
+            <TouchableOpacity
+              style={styles.botaoMostrarSenha}
+              onPress={() => setMostrarConfirmaSenha(!mostrarConfirmaSenha)}
+            >
+              <Text>{mostrarConfirmaSenha ? '👁️' : '👁️‍🗨️'}</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
 
